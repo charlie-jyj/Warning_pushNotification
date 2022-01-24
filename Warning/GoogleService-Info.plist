@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>836397952657-3p12dtv5r776k93cf9dtmhjrcskjn9ga.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.836397952657-3p12dtv5r776k93cf9dtmhjrcskjn9ga</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC1peexDpcC_wOtj_SLsm9SO6GwPaxJu0E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>836397952657</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fastcampus.Warning</string>
+	<key>PROJECT_ID</key>
+	<string>warning-69254</string>
+	<key>STORAGE_BUCKET</key>
+	<string>warning-69254.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:836397952657:ios:e4ebedd8e7c781c3da1930</string>
+</dict>
+</plist>
