@@ -11,12 +11,26 @@ import NotificationCenter
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
+        // 현재 등록 토큰 확인
+        Messaging.messaging().token {
+            token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+              } else if let token = token {
+                print("FCM registration token: \(token)")
+              }
+        }
         
         // 사용자 동의를 받기 위함
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -48,11 +62,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.banner, .list, .badge, .sound])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
+        completionHandler([.list, .banner, .sound])
     }
 }
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+      print("Firebase renewed registration token: \(String(describing: fcmToken))")
+
+      let dataDict: [String: String] = ["token": fcmToken ?? ""]
+      NotificationCenter.default.post(
+        name: Notification.Name("FCMToken"),
+        object: nil,
+        userInfo: dataDict
+      )
+      // TODO: If necessary send token to application server.
+      // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+
+}
+
 

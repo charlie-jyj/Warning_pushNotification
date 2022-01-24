@@ -64,7 +64,45 @@ A/B testing 을 위한 방법
 1. Remote config
 2. Cloud messaging
 
+##### registration tokens
+The FCM SDK generates a registration token for the client app instance on app launch.
+Similar to the APNs device token, this token allow you to send targeted notifications to any particular instance of your app
+
+In the same way that Apple platforms typically deliver an APNs device token on app start,
+FCM provides a registration token via *FIRMessagingDelegate*’s *messaging:didReceiveRegistrationToken*
+- FCM의 현재 등록 토큰, 갱신되는 시점에 대해 알고
+- 그에 따른 적절한 액션을 취할 수 있다.
+- 이 토큰을 등록하여 Cloud Message 를 보낸다.
+
+https://firebase.google.com/docs/cloud-messaging/ios/client
 
 ### 3) 새롭게 알게 된 것
+
+- UNUserNotificationCenterDelegate
+    - willPresent
+    - 전달받은 Notification를 어떻게 display할 것인지 알림 형태를 지정할 수 있다.
+    - 기본값 지정
+
+```swift
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.list, .banner, .sound])
+    }
+}
+
+```
+
+- UIApplication.shared
+> applicationIconBadgeNumber 을 컨트롤하는 데에 사용했음
+
+*UIApplication*
+- The centralized point of control and coordination for apps running in iOS
+https://developer.apple.com/documentation/uikit/uiapplication
+
+*shared*
+- The singleton app instance
+- return the app instance is created in the UIApplicationMain(_:_:_:_:) function
+- The UIApplicationMain function creates the shared app instance at launch time
+
 
 
